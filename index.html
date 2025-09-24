@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AthleteAI - Advanced Strength Testing Platform</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Professional AI-powered athlete strength testing and performance tracking platform with offline capabilities">
+    <meta name="keywords" content="athlete, strength testing, AI, performance tracking, sports analytics">
+    <meta name="author" content="AthleteAI Platform">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1a365d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="AthleteAI">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AthleteAI - Advanced Strength Testing Platform">
+    <meta property="og:description" content="Professional AI-powered athlete strength testing and performance tracking">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/images/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <i class="fas fa-dumbbell"></i>
+                <h1>AthleteAI</h1>
+            </div>
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Initializing AI Systems...</p>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Screen -->
+    <div id="auth-screen" class="screen">
+        <div class="auth-background">
+            <div class="auth-particles"></div>
+        </div>
+        
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    <h1>AthleteAI</h1>
+                </div>
+                <p class="tagline">Advanced AI-Powered Performance Analysis</p>
+            </div>
+            
+            <div class="auth-form-container">
+                <div class="auth-tabs">
+                    <button class="tab-btn active" data-tab="login">Login</button>
+                    <button class="tab-btn" data-tab="register">Register</button>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form active">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="login-email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="login-password" placeholder="Enter your password" required>
+                            <button type="button" class="password-toggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="remember-me">
+                            <span class="checkmark"></span>
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                    </div>
+                    
+                    <div class="biometric-auth">
+                        <button type="button" id="face-recognition-btn" class="biometric-btn">
+                            <i class="fas fa-camera"></i>
+                            <span>Face Recognition</span>
+                        </button>
+                        <div id="face-recognition-status" class="biometric-status hidden"></div>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn primary">
+                        <span>Sign In</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+                
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="register-name" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-email">Email Address</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="register-email" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="register-password" placeholder="Create a password" required>
+                            <button type="button" class="password-toggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill"></div>
+                            </div>
+                            <span class="strength-text">Password strength</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="user-role">Role</label>
+                        <div class="input-group">
+                            <i class="fas fa-user-tag"></i>
+                            <select id="user-role" required>
+                                <option value="">Select your role</option>
+                                <option value="athlete">Athlete</option>
+                                <option value="coach">Coach</option>
+                                <option value="admin">Administrator</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="terms-agreement" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="privacy-link">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn primary">
+                        <span>Create Account</span>
+                        <i class="fas fa-user-plus"></i>
+                    </button>
+                </form>
+            </div>
+            
+            <div class="auth-footer">
+                <p>Secure • Private • Offline Capable</p>
+                <div class="security-badges">
+                    <i class="fas fa-shield-alt"></i>
+                    <i class="fas fa-lock"></i>
+                    <i class="fas fa-user-secret"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Type Selection -->
+    <div id="user-type-screen" class="screen hidden">
+        <div class="user-type-container">
+            <div class="user-type-header">
+                <h2>Welcome to AthleteAI</h2>
+                <p>Select your role to access the appropriate features</p>
+            </div>
+            
+            <div class="user-type-options">
+                <div class="user-type-card" data-type="athlete">
+                    <div class="card-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <h3>Athlete</h3>
+                    <p>Track your performance, log training sessions, and receive AI-powered feedback on your strength and form.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> AI Strength Testing</li>
+                        <li><i class="fas fa-check"></i> Performance Tracking</li>
+                        <li><i class="fas fa-check"></i> Nutrition Planning</li>
+                        <li><i class="fas fa-check"></i> Coach Communication</li>
+                    </ul>
+                    <button class="select-role-btn">Select Athlete</button>
+                </div>
+                
+                <div class="user-type-card" data-type="coach">
+                    <div class="card-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>Coach</h3>
+                    <p>Monitor your athletes, create training plans, and provide guidance based on AI analytics and performance data.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Athlete Management</li>
+                        <li><i class="fas fa-check"></i> Training Plans</li>
+                        <li><i class="fas fa-check"></i> Performance Analytics</li>
+                        <li><i class="fas fa-check"></i> Communication Hub</li>
+                    </ul>
+                    <button class="select-role-btn">Select Coach</button>
+                </div>
+                
+                <div class="user-type-card" data-type="admin">
+                    <div class="card-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Administrator</h3>
+                    <p>Manage the entire platform, configure settings, and oversee system operations and user management.</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> User Management</li>
+                        <li><i class="fas fa-check"></i> System Configuration</li>
+                        <li><i class="fas fa-check"></i> Analytics & Reports</li>
+                        <li><i class="fas fa-check"></i> Data Management</li>
+                    </ul>
+                    <button class="select-role-btn">Select Admin</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="main-app" class="screen hidden">
+        <!-- Navigation Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-dumbbell"></i>
+                    <span>AthleteAI</span>
+                </div>
+                <nav class="main-nav">
+                    <a href="#" class="nav-link active" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-link" data-section="training">
+                        <i class="fas fa-dumbbell"></i>
+                        <span>Training</span>
+                    </a>
+                    <a href="#" class="nav-link" data-section="analytics">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                    <a href="#" class="nav-link" data-section="nutrition">
+                        <i class="fas fa-apple-alt"></i>
+                        <span>Nutrition</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="header-right">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search..." class="search-input">
+                </div>
+                
+                <div class="notifications">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                </div>
+                
+                <div class="user-menu">
+                    <div class="user-avatar">
+                        <img src="assets/images/default-avatar.png" alt="User Avatar" id="user-avatar">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name" id="user-name">John Doe</span>
+                        <span class="user-role" id="user-role">Athlete</span>
+                    </div>
+                    <button class="user-menu-btn">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <div class="section-header">
+                    <h1>Performance Dashboard</h1>
+                    <div class="section-actions">
+                        <button class="btn secondary">
+                            <i class="fas fa-download"></i>
+                            Export Data
+                        </button>
+                        <button class="btn primary">
+                            <i class="fas fa-plus"></i>
+                            New Session
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Stats Overview -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Strength Score</h3>
+                            <div class="stat-value" id="strength-score">87</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +5% from last week
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Training Sessions</h3>
+                            <div class="stat-value" id="training-count">24</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +3 this week
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Recovery Level</h3>
+                            <div class="stat-value" id="recovery-level">Good</div>
+                            <div class="stat-change neutral">
+                                <i class="fas fa-minus"></i>
+                                Stable
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Achievements</h3>
+                            <div class="stat-value" id="achievements">12</div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-star"></i>
+                                2 new this month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="actions-grid">
+                        <button class="action-card" id="ai-strength-test-btn">
+                            <div class="action-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>AI Strength Test</h3>
+                            <p>Get real-time form analysis and recommendations</p>
+                        </button>
+                        
+                        <button class="action-card" id="log-training-btn">
+                            <div class="action-icon">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <h3>Log Training</h3>
+                            <p>Record your workout session</p>
+                        </button>
+                        
+                        <button class="action-card" id="nutrition-plan-btn">
+                            <div class="action-icon">
+                                <i class="fas fa-apple-alt"></i>
+                            </div>
+                            <h3>Nutrition Plan</h3>
+                            <p>View your meal plan and macros</p>
+                        </button>
+                        
+                        <button class="action-card" id="message-coach-btn">
+                            <div class="action-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3>Message Coach</h3>
+                            <p>Communicate with your coach</p>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Strength Training Session</h4>
+                                <p>Completed bench press workout with AI analysis</p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                            <div class="activity-score">92%</div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Coach Message</h4>
+                                <p>Received feedback on your form improvement</p>
+                                <span class="activity-time">4 hours ago</span>
+                            </div>
+                            <div class="activity-score">New</div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-apple-alt"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h4>Nutrition Log</h4>
+                                <p>Updated meal plan for this week</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                            <div class="activity-score">Complete</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Training Section -->
+            <section id="training-section" class="content-section">
+                <div class="section-header">
+                    <h1>Training Center</h1>
+                    <div class="section-actions">
+                        <button class="btn secondary">
+                            <i class="fas fa-history"></i>
+                            History
+                        </button>
+                        <button class="btn primary" id="start-new-session">
+                            <i class="fas fa-play"></i>
+                            Start Session
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Training Options -->
+                <div class="training-options">
+                    <div class="training-card" id="ai-testing-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>AI Strength Testing</h3>
+                            <span class="card-badge">Recommended</span>
+                        </div>
+                        <p>Advanced computer vision analysis of your form and technique with real-time feedback and recommendations.</p>
+                        <div class="card-features">
+                            <span class="feature-tag">Real-time Analysis</span>
+                            <span class="feature-tag">Form Correction</span>
+                            <span class="feature-tag">Progress Tracking</span>
+                        </div>
+                        <button class="card-btn primary">Start AI Test</button>
+                    </div>
+                    
+                    <div class="training-card" id="manual-entry-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <h3>Manual Entry</h3>
+                        </div>
+                        <p>Log your training session manually with detailed exercise tracking and performance metrics.</p>
+                        <div class="card-features">
+                            <span class="feature-tag">Custom Exercises</span>
+                            <span class="feature-tag">Detailed Logging</span>
+                            <span class="feature-tag">Progress Charts</span>
+                        </div>
+                        <button class="card-btn secondary">Manual Entry</button>
+                    </div>
+                    
+                    <div class="training-card" id="wearable-sync-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-watch"></i>
+                            </div>
+                            <h3>Wearable Sync</h3>
+                        </div>
+                        <p>Sync data from your fitness trackers and smartwatches for comprehensive activity monitoring.</p>
+                        <div class="card-features">
+                            <span class="feature-tag">Auto Sync</span>
+                            <span class="feature-tag">Multi-device</span>
+                            <span class="feature-tag">Real-time Data</span>
+                        </div>
+                        <button class="card-btn secondary">Sync Devices</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Testing Interface -->
+            <div id="ai-testing-interface" class="ai-interface hidden">
+                <div class="ai-header">
+                    <button class="back-btn" id="back-to-training">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Training
+                    </button>
+                    <h2>AI Strength Testing Assistant</h2>
+                    <p>Position yourself in front of the camera for real-time analysis</p>
+                </div>
+                
+                <div class="ai-content">
+                    <div class="video-container">
+                        <video id="camera-feed" autoplay muted></video>
+                        <canvas id="analysis-canvas"></canvas>
+                        <div class="ai-overlay">
+                            <div class="pose-detection-box"></div>
+                            <div class="ai-instructions">
+                                <p id="ai-instruction-text">Stand in the center of the frame</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ai-controls">
+                        <button id="start-ai-test" class="ai-btn primary">
+                            <i class="fas fa-play"></i>
+                            Start Analysis
+                        </button>
+                        <button id="stop-ai-test" class="ai-btn secondary">
+                            <i class="fas fa-stop"></i>
+                            Stop Analysis
+                        </button>
+                        <button id="capture-snapshot" class="ai-btn secondary">
+                            <i class="fas fa-camera"></i>
+                            Capture
+                        </button>
+                    </div>
+                    
+                    <div id="ai-results" class="ai-results hidden">
+                        <h3>Analysis Results</h3>
+                        <div class="results-grid">
+                            <div class="result-card">
+                                <h4>Form Score</h4>
+                                <div class="result-value" id="form-score">92%</div>
+                                <div class="result-bar">
+                                    <div class="result-fill" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="result-card">
+                                <h4>Power Output</h4>
+                                <div class="result-value" id="power-output">High</div>
+                                <div class="result-indicator high"></div>
+                            </div>
+                            
+                            <div class="result-card">
+                                <h4>Stability</h4>
+                                <div class="result-value" id="stability-score">88%</div>
+                                <div class="result-bar">
+                                    <div class="result-fill" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="result-card">
+                                <h4>Symmetry</h4>
+                                <div class="result-value" id="symmetry-score">95%</div>
+                                <div class="result-bar">
+                                    <div class="result-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="recommendations">
+                            <h4>Recommendations</h4>
+                            <div id="recommendations-list">
+                                <div class="recommendation-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Excellent form! Maintain current technique.</span>
+                                </div>
+                                <div class="recommendation-item">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>Consider increasing weight by 5-10% for next session.</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-actions">
+                            <button class="btn secondary">
+                                <i class="fas fa-download"></i>
+                                Export Results
+                            </button>
+                            <button class="btn primary">
+                                <i class="fas fa-save"></i>
+                                Save Session
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manual Entry Form -->
+            <div id="manual-entry-form" class="manual-form hidden">
+                <div class="form-header">
+                    <button class="back-btn" id="back-to-training-manual">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Training
+                    </button>
+                    <h2>Manual Training Entry</h2>
+                </div>
+                
+                <form id="training-form" class="training-form">
+                    <div class="form-section">
+                        <h3>Session Details</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="session-date">Date</label>
+                                <input type="date" id="session-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="session-duration">Duration (minutes)</label>
+                                <input type="number" id="session-duration" placeholder="60" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Exercise Details</h3>
+                        <div class="exercise-entry">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="exercise-type">Exercise</label>
+                                    <select id="exercise-type" required>
+                                        <option value="">Select Exercise</option>
+                                        <option value="bench-press">Bench Press</option>
+                                        <option value="squat">Squat</option>
+                                        <option value="deadlift">Deadlift</option>
+                                        <option value="overhead-press">Overhead Press</option>
+                                        <option value="pull-ups">Pull-ups</option>
+                                        <option value="push-ups">Push-ups</option>
+                                        <option value="custom">Custom Exercise</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exercise-category">Category</label>
+                                    <select id="exercise-category">
+                                        <option value="strength">Strength</option>
+                                        <option value="cardio">Cardio</option>
+                                        <option value="flexibility">Flexibility</option>
+                                        <option value="sports-specific">Sports Specific</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="weight">Weight (lbs)</label>
+                                    <input type="number" id="weight" placeholder="135" step="0.5">
+                                </div>
+                                <div class="form-group">
+                                    <label for="reps">Repetitions</label>
+                                    <input type="number" id="reps" placeholder="10" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sets">Sets</label>
+                                    <input type="number" id="sets" placeholder="3" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="rest-time">Rest Time (seconds)</label>
+                                    <input type="number" id="rest-time" placeholder="90">
+                                </div>
+                                <div class="form-group">
+                                    <label for="difficulty">Difficulty (1-10)</label>
+                                    <input type="range" id="difficulty" min="1" max="10" value="5">
+                                    <span class="range-value">5</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="notes">Notes</label>
+                                <textarea id="notes" placeholder="Any additional notes about this exercise..."></textarea>
+                            </div>
+                            
+                            <button type="button" class="btn secondary add-exercise">
+                                <i class="fas fa-plus"></i>
+                                Add Another Exercise
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn secondary">Save Draft</button>
+                        <button type="submit" class="btn primary">
+                            <i class="fas fa-save"></i>
+                            Save Session
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Other sections (Analytics, Nutrition, etc.) would go here -->
+        </main>
+    </div>
+
+    <!-- Offline Indicator -->
+    <div id="offline-indicator" class="offline-indicator hidden">
+        <i class="fas fa-wifi"></i>
+        <span>Offline Mode</span>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification-toast" class="notification-toast hidden">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span class="toast-message">Operation completed successfully</span>
+        </div>
+        <button class="toast-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/ai-assistant.js"></script>
+    <script src="assets/js/face-recognition.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
